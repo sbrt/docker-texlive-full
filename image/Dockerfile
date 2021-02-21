@@ -131,8 +131,6 @@ RUN echo "Initial update." &&\
           texlive-science \
           texlive-xetex \
           texlive-bibtex-extra &&\
-# Updating the lualatex font names database
-    luaotfload-tool --update &&\
 # Tex Live packages via tlmgr
     tlmgr init-usertree &&\
     # tlmgr install ...
@@ -145,9 +143,13 @@ RUN echo "Initial update." &&\
     (rm -rf /usr/share/texlive/release-texlive.txt || true) &&\
     (rm -rf /usr/share/texlive/doc.html || true) &&\
     (rm -rf /usr/share/texlive/index.html || true) &&\
-# update font cache
+# update font cache and font 
     echo "Update font cache." &&\
     fc-cache -fv &&\
+    luaotfload-tool --update &&\
+# Rebuild ls-R filename databases used by TeX
+    echo "Rebuild ls-R filename databases used by TeX." &&\
+    texhash &&\
 # clean up all temporary files
     echo "Clean up all temporary files." &&\
     apt-get clean -y &&\
