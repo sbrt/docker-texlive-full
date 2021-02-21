@@ -131,6 +131,8 @@ RUN echo "Initial update." &&\
           texlive-science \
           texlive-xetex \
           texlive-bibtex-extra &&\
+# Updating the lualatex font names database
+    luaotfload-tool --update &&\
 # Tex Live packages via tlmgr
     tlmgr init-usertree &&\
     # tlmgr install ...
