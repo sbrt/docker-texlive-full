@@ -71,7 +71,8 @@ RUN echo "Initial update." &&\
           ttf-wqy-zenhei \
           xfonts-intl-chinese \
           xfonts-intl-chinese-big \
-          xfonts-wqy &&\
+          xfonts-wqy \
+          xz-utils &&\
 # now the microsoft core fonts
     echo "Installing microsoft core fonts." &&\
     echo "ttf-mscorefonts-installer msttcorefonts/accepted-mscorefonts-eula select true" | debconf-set-selections &&\
@@ -130,6 +131,9 @@ RUN echo "Initial update." &&\
           texlive-science \
           texlive-xetex \
           texlive-bibtex-extra &&\
+# Tex Live packages via tlmgr
+    tlmgr init-usertree &&\
+    # tlmgr install ...
 # delete Tex Live sources and other potentially useless stuff
     echo "Delete TeX Live sources and other useless stuff." &&\
     (rm -rf /usr/share/texmf/source || true) &&\
